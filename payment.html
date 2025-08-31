@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Payment</h1>
+  </header>
+
+  <main>
+    <h3>Select Payment Mode:</h3>
+    <form id="payment-form">
+      <label><input type="radio" name="method" value="Credit Card" required> Credit Card</label><br>
+      <label><input type="radio" name="method" value="UPI"> UPI</label><br>
+      <label><input type="radio" name="method" value="Cash on Delivery"> Cash on Delivery</label><br><br>
+      <button type="submit">Pay Now</button>
+    </form>
+  </main>
+
+  <script src="payment.js"></script>
+</body>
+</html>
