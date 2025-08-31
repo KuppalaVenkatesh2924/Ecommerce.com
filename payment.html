@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment - My Store</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+    header {
+      background: #333;
+      color: #fff;
+      padding: 15px;
+    }
+    main {
+      padding: 20px;
+    }
+    form {
+      background: #fff;
+      padding: 20px;
+      display: inline-block;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    label {
+      display: block;
+      margin: 10px 0;
+      font-size: 18px;
+    }
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      border: none;
+      background: #28a745;
+      color: #fff;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #218838;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Payment</h1>
+  </header>
+
+  <main>
+    <h2>Select Payment Method</h2>
+    <form id="payment-form">
+      <label><input type="radio" name="method" value="Credit Card" required> 💳 Credit Card</label>
+      <label><input type="radio" name="method" value="UPI"> 📱 UPI</label>
+      <label><input type="radio" name="method" value="Cash on Delivery"> 🚚 Cash on Delivery</label>
+      <button type="submit">Pay Now</button>
+    </form>
+  </main>
+
+  <script>
+    document.getElementById("payment-form").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const method = document.querySelector("input[name='method']:checked").value;
+      localStorage.setItem("payment", method);
+      window.location.href = "success.html"; // redirect to success page
+    });
+  </script>
+</body>
+</html>
