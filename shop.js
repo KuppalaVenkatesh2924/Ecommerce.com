@@ -1,10 +1,34 @@
 // Products
-let products = [
-  { id: 1, name: "Laptop", price: 800, desc: "High performance laptop", img: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=600" },
-  { id: 2, name: "Smartphone", price: 500, desc: "Latest smartphone", img: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600" },
-  { id: 3, name: "Headphones", price: 100, desc: "Noise cancelling", img: "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?w=600" },
-  { id: 4, name: "Camera", price: 400, desc: "HD DSLR Camera",  img: "https://images.unsplash.com/photo-1519183071298-a2962eadc5ab?w=600" }
-  ];
+let products =  [
+  {
+    id: 1,
+    name: "Laptop",
+    price: 800,
+    desc: "High performance laptop",
+    img: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=600&auto=format&fit=crop&q=80"
+  },
+  {
+    id: 2,
+    name: "Smartphone",
+    price: 500,
+    desc: "Latest smartphone",
+    img: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&auto=format&fit=crop&q=80"
+  },
+  {
+    id: 3,
+    name: "Headphones",
+    price: 100,
+    desc: "Noise cancelling headphones",
+    img: "https://images.unsplash.com/photo-1518444029499-9d6f9d4a1d4d?w=600&auto=format&fit=crop&q=80"
+  },
+  {
+    id: 4,
+    name: "Camera",
+    price: 400,
+    desc: "HD DSLR Camera",
+    img: "https://images.unsplash.com/photo-1504215680853-026ed2a45def?w=600&auto=format&fit=crop&q=80"
+  }
+];
 
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
