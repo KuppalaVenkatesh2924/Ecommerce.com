@@ -1,26 +1,99 @@
-<form id="checkout-form">
-  <input type="text" id="fullname" placeholder="Full Name" required>
-  <input type="text" id="address" placeholder="Address" required>
-  <input type="text" id="city" placeholder="City" required>
-  <input type="text" id="zip" placeholder="ZIP Code" required>
-  <button type="submit">Next → Payment</button>
-</form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #6a11cb, #2575fc);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
 
-<script>
-  document.getElementById("checkout-form").addEventListener("submit", (e) => {
-    e.preventDefault();
+    #checkout-form {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+      width: 320px;
+    }
 
-    const address = {
-      fullname: document.getElementById("fullname").value,
-      address: document.getElementById("address").value,
-      city: document.getElementById("city").value,
-      zip: document.getElementById("zip").value,
-    };
+    #checkout-form h2 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 20px;
+    }
 
-    // Save address in localStorage
-    localStorage.setItem("address", JSON.stringify(address));
+    #checkout-form input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      font-size: 16px;
+      transition: border 0.3s, box-shadow 0.3s;
+    }
 
-    // Redirect to payment page
-    window.location.href = "payment.html";
-  });
-</script>
+    #checkout-form input:focus {
+      border-color: #2575fc;
+      box-shadow: 0 0 8px rgba(37,117,252,0.5);
+      outline: none;
+    }
+
+    #checkout-form button {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(45deg, #ff6a00, #ee0979);
+      color: white;
+      font-size: 18px;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 15px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    #checkout-form button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+  </style>
+</head>
+<body>
+
+  <form id="checkout-form">
+    <h2>Shipping Address</h2>
+    <input type="text" id="fullname" placeholder="Full Name" required>
+    <input type="text" id="address" placeholder="Address" required>
+    <input type="text" id="city" placeholder="City" required>
+    <input type="text" id="zip" placeholder="ZIP Code" required>
+    <button type="submit">Next → Payment</button>
+  </form>
+
+  <script>
+    document.getElementById("checkout-form").addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const address = {
+        fullname: document.getElementById("fullname").value,
+        address: document.getElementById("address").value,
+        city: document.getElementById("city").value,
+        zip: document.getElementById("zip").value,
+      };
+
+      // Save address in localStorage
+      localStorage.setItem("address", JSON.stringify(address));
+
+      // Redirect to payment page
+      window.location.href = "payment.html";
+    });
+  </script>
+
+</body>
+</html>
