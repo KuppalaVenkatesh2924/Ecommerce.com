@@ -4,7 +4,72 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Order Success</title>
-  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #a8edea, #fed6e3);
+      color: #333;
+    }
+
+    header {
+      background-color: #4caf50;
+      color: white;
+      text-align: center;
+      padding: 30px 20px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.2em;
+    }
+
+    main {
+      max-width: 800px;
+      margin: 40px auto;
+      background-color: #ffffffdd;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      text-align: center;
+    }
+
+    main h2 {
+      color: #4caf50;
+      margin-bottom: 20px;
+    }
+
+    #order-summary {
+      text-align: left;
+      padding: 20px;
+      background-color: #f1f8e9;
+      border-radius: 10px;
+      box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    #order-summary p {
+      margin: 10px 0;
+      font-size: 1.1em;
+    }
+
+    button {
+      margin-top: 25px;
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1em;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #388e3c;
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -13,7 +78,13 @@
 
   <main>
     <h2>Order Details</h2>
-    <div id="order-summary"></div>
+    <div id="order-summary">
+      <p>Order Number: #123456</p>
+      <p>Items: 3</p>
+      <p>Total Amount: $150</p>
+      <p>Expected Delivery: 5-7 Business Days</p>
+    </div>
+    <button onclick="window.location.href='index.html'">Back to Shop</button>
   </main>
 
   <script src="success.js"></script>
