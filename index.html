@@ -3,20 +3,149 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Shop - E-Commerce</title>
-  <link rel="stylesheet" href="style.css">
+  <title>My Store - E-Commerce</title>
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Arial', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #f9f9f9, #c0eaff);
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header */
+    header {
+      background: #ff6f61;
+      color: white;
+      padding: 20px 0;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    header h1 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: bold;
+      transition: transform 0.2s;
+    }
+
+    nav a:hover {
+      transform: scale(1.1);
+    }
+
+    /* Products Section */
+    .products-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 20px;
+      flex-grow: 1;
+    }
+
+    .product-card {
+      background: white;
+      border-radius: 10px;
+      padding: 15px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    .product-card img {
+      width: 100%;
+      border-radius: 10px;
+    }
+
+    .product-card h3 {
+      margin: 10px 0;
+      font-size: 1.2rem;
+    }
+
+    .product-card p {
+      margin: 5px 0;
+      color: #555;
+    }
+
+    .product-card button {
+      margin-top: 10px;
+      padding: 10px 15px;
+      background: #ff6f61;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.2s;
+    }
+
+    .product-card button:hover {
+      background: #e0554f;
+    }
+
+    /* Footer */
+    footer {
+      background: #333;
+      color: white;
+      text-align: center;
+      padding: 15px 10px;
+    }
+
+    footer p {
+      margin: 5px 0;
+      font-size: 0.9rem;
+    }
+  </style>
 </head>
 <body>
   <header>
-    <h1>My Store</h1>
+    <h1>🛍️ My Store</h1>
     <nav>
       <a href="cart.html">🛒 Cart (<span id="cart-count">0</span>)</a>
+      <a href="orders.html">📦 My Orders</a>
+      <a href="address.html">🏠 Place Address</a>
     </nav>
   </header>
 
   <main>
-    <section id="products"></section>
+    <section id="products" class="products-container">
+      <!-- Products will be displayed here via JS -->
+      <div class="product-card">
+        <img src="https://via.placeholder.com/250x150" alt="Product">
+        <h3>Sample Product</h3>
+        <p>Price: ₹999</p>
+        <button>Add to Cart</button>
+      </div>
+      <div class="product-card">
+        <img src="https://via.placeholder.com/250x150" alt="Product">
+        <h3>Another Product</h3>
+        <p>Price: ₹499</p>
+        <button>Add to Cart</button>
+      </div>
+    </section>
   </main>
+
+  <footer>
+    <p>📍 My Store, 123 Market Street, City Name, Country</p>
+    <p>📧 support@mystore.com | 📞 +91 9876543210</p>
+  </footer>
 
   <script src="shop.js"></script>
 </body>
