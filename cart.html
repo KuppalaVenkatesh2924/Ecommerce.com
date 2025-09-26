@@ -1,131 +1,78 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Your Cart</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #fdf6e3;
-      color: #333;
-      margin: 0;
-      padding: 0;
-    }
+<!DOCTYPE html>  <html lang="en">  
+<head>  
+  <meta charset="UTF-8">  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+  <title>Your Cart</title>  
+  <style>  
+    body {  
+      font-family: Arial, sans-serif;  
+      background-color: #fdf6e3;  
+      color: #333;  
+      margin: 0;  
+      padding: 0;  
+    }  header {  
+  background-color: #ff6f61;  
+  color: white;  
+  padding: 20px;  
+  text-align: center;  
+}  
 
-    header {
-      background-color: #ff6f61;
-      color: white;
-      padding: 20px;
-      text-align: center;
-    }
+header h1 {  
+  margin: 0;  
+  font-size: 2em;  
+}  
 
-    header h1 {
-      margin: 0;
-      font-size: 2em;
-    }
+nav a {  
+  color: white;  
+  text-decoration: none;  
+  font-weight: bold;  
+  margin-top: 10px;  
+  display: inline-block;  
+}  
 
-    nav a {
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-      margin-top: 10px;
-      display: inline-block;
-    }
+main {  
+  padding: 20px;  
+  max-width: 800px;  
+  margin: auto;  
+  background-color: #fff8f0;  
+  border-radius: 10px;  
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);  
+  margin-top: 20px;  
+}  
 
-    main {
-      padding: 20px;
-      max-width: 800px;
-      margin: auto;
-      background-color: #fff8f0;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      margin-top: 20px;
-    }
+#cart-items {  
+  margin-bottom: 20px;  
+}  
 
-    #cart-items {
-      margin-bottom: 20px;
-    }
+h3 {  
+  color: #ff6f61;  
+}  
 
-    h3 {
-      color: #ff6f61;
-    }
+button {  
+  background-color: #ff6f61;  
+  color: white;  
+  border: none;  
+  padding: 12px 25px;  
+  border-radius: 5px;  
+  cursor: pointer;  
+  font-size: 1em;  
+}  
 
-    label {
-      display: block;
-      margin: 15px 0 5px;
-      font-weight: bold;
-    }
+button:hover {  
+  background-color: #ff3b2e;  
+}
 
-    input[type="text"] {
-      width: 100%;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      font-size: 1em;
-    }
-
-    .error {
-      color: red;
-      font-size: 0.9em;
-      display: none;
-      margin-top: 5px;
-    }
-
-    button {
-      background-color: #ff6f61;
-      color: white;
-      border: none;
-      padding: 12px 25px;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 1em;
-      margin-top: 15px;
-    }
-
-    button:hover {
-      background-color: #ff3b2e;
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <h1>Your Cart</h1>
-    <nav>
-      <a href="index.html">🏬 Shop</a>
-    </nav>
-  </header>
-
-  <main>
-    <div id="cart-items"></div>
-    <h3>Total: $<span id="cart-total">0</span></h3>
-
-    <!-- Pincode Field -->
-    <label for="pincode">Enter Delivery Pincode:</label>
-    <input type="text" id="pincode" maxlength="6" placeholder="Enter 6-digit Indian pincode">
-    <div id="pincode-error" class="error">❌ Please enter a valid 6-digit Indian pincode.</div>
-
-    <button onclick="goCheckout()">Proceed to Checkout</button>
-  </main>
-
-  <script src="cart.js"></script>
-  <script>
-    function goCheckout() {
-      const pincode = document.getElementById("pincode").value.trim();
-      const errorMsg = document.getElementById("pincode-error");
-
-      // ✅ Indian Pincode format: 6 digits, starting 1-9 (not 0)
-      const valid = /^[1-9][0-9]{5}$/.test(pincode);
-
-      if (!valid) {
-        errorMsg.style.display = "block";
-        return;
-      } else {
-        errorMsg.style.display = "none";
-        localStorage.setItem("pincode", pincode);
-        window.location.href = "payment.html"; // Redirect to payment page
-      }
-    }
-  </script>
-</body>
-</html>
+  </style>  
+</head>  
+<body>  
+  <header>  
+    <h1>Your Cart</h1>  
+    <nav>  
+      <a href="index.html">🏬 Shop</a>  
+    </nav>  
+  </header>    <main>  
+    <div id="cart-items"></div>  
+    <h3>Total: $<span id="cart-total">0</span></h3>  
+    <button onclick="goCheckout()">Proceed to Checkout</button>  
+  </main>    <script src="cart.js"></script>  </body>  
+</html>  
