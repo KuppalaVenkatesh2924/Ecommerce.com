@@ -4,11 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Payment - My Store</title>
-  <link rel="stylesheet" href="style.css">
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: #f9f9f9;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(135deg, #74ebd5 0%, #ACB6E5 100%);
       margin: 0;
       padding: 0;
       text-align: center;
@@ -17,58 +16,151 @@
       background: #333;
       color: #fff;
       padding: 15px;
+      font-size: 22px;
+      font-weight: bold;
+      letter-spacing: 1px;
     }
     main {
       padding: 20px;
     }
     form {
       background: #fff;
-      padding: 20px;
+      padding: 25px;
       display: inline-block;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      border-radius: 15px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+      text-align: left;
+      width: 320px;
+    }
+    h2 {
+      text-align: center;
+      color: #333;
     }
     label {
       display: block;
-      margin: 10px 0;
+      margin: 12px 0;
       font-size: 18px;
-    }
-    button {
-      margin-top: 15px;
-      padding: 10px 20px;
-      border: none;
-      background: #28a745;
-      color: #fff;
-      font-size: 16px;
-      border-radius: 5px;
       cursor: pointer;
     }
+    .options {
+      margin-left: 25px;
+      margin-top: 10px;
+      display: none;
+      font-size: 16px;
+    }
+    select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    button {
+      margin-top: 20px;
+      padding: 12px;
+      border: none;
+      width: 100%;
+      background: linear-gradient(135deg, #28a745, #218838);
+      color: #fff;
+      font-size: 18px;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
     button:hover {
-      background: #218838;
+      background: linear-gradient(135deg, #218838, #1e7e34);
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>Payment</h1>
+    <h1>💰 Secure Payment</h1>
   </header>
 
   <main>
     <h2>Select Payment Method</h2>
     <form id="payment-form">
-      <label><input type="radio" name="method" value="Credit Card" required> 💳 Credit Card</label>
-      <label><input type="radio" name="method" value="UPI"> 📱 UPI</label>
-      <label><input type="radio" name="method" value="Cash on Delivery"> 🚚 Cash on Delivery</label>
+      <!-- Credit Card -->
+      <label>
+        <input type="radio" name="method" value="Credit Card" required> 💳 Credit Card
+      </label>
+      <div class="options" id="credit-options">
+        <select id="credit-bank">
+          <option value="">-- Select Bank --</option>
+          <option value="SBI">SBI</option>
+          <option value="Axis">Axis</option>
+          <option value="Union">Union</option>
+        </select>
+      </div>
+
+      <!-- UPI -->
+      <label>
+        <input type="radio" name="method" value="UPI"> 📱 UPI
+      </label>
+      <div class="options" id="upi-options">
+        <select id="upi-app">
+          <option value="">-- Select UPI App --</option>
+          <option value="PhonePe">PhonePe</option>
+          <option value="Google Pay">Google Pay</option>
+          <option value="Paytm">Paytm</option>
+        </select>
+      </div>
+
+      <!-- Net Banking -->
+      <label>
+        <input type="radio" name="method" value="Net Banking"> 🌐 Net Banking
+      </label>
+      <div class="options" id="netbanking-options">
+        <select id="netbanking-bank">
+          <option value="">-- Select Bank --</option>
+          <option value="SBI">SBI</option>
+          <option value="Axis">Axis</option>
+          <option value="Union">Union</option>
+        </select>
+      </div>
+
+      <!-- COD -->
+      <label>
+        <input type="radio" name="method" value="Cash on Delivery"> 🚚 Cash on Delivery
+      </label>
+
       <button type="submit">Pay Now</button>
     </form>
   </main>
 
   <script>
-    document.getElementById("payment-form").addEventListener("submit", (e) => {
+    const form = document.getElementById("payment-form");
+    const options = {
+      "Credit Card": document.getElementById("credit-options"),
+      "UPI": document.getElementById("upi-options"),
+      "Net Banking": document.getElementById("netbanking-options")
+    };
+
+    document.querySelectorAll("input[name='method']").forEach(radio => {
+      radio.addEventListener("change", () => {
+        for (let key in options) options[key].style.display = "none";
+        if (options[radio.value]) {
+          options[radio.value].style.display = "block";
+        }
+      });
+    });
+
+    form.addEventListener("submit", (e) => {
       e.preventDefault();
       const method = document.querySelector("input[name='method']:checked").value;
-      localStorage.setItem("payment", method);
-      window.location.href = "success.html"; // redirect to success page
+      let detail = "";
+
+      if (method === "Credit Card") {
+        detail = document.getElementById("credit-bank").value;
+      } else if (method === "UPI") {
+        detail = document.getElementById("upi-app").value;
+      } else if (method === "Net Banking") {
+        detail = document.getElementById("netbanking-bank").value;
+      }
+
+      localStorage.setItem("payment", method + (detail ? " - " + detail : ""));
+      window.location.href = "success.html";
     });
   </script>
 </body>
