@@ -51,6 +51,27 @@
       color: #ff6f61;
     }
 
+    label {
+      display: block;
+      margin: 15px 0 5px;
+      font-weight: bold;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1em;
+    }
+
+    .error {
+      color: red;
+      font-size: 0.9em;
+      display: none;
+      margin-top: 5px;
+    }
+
     button {
       background-color: #ff6f61;
       color: white;
@@ -59,6 +80,7 @@
       border-radius: 5px;
       cursor: pointer;
       font-size: 1em;
+      margin-top: 15px;
     }
 
     button:hover {
@@ -77,9 +99,33 @@
   <main>
     <div id="cart-items"></div>
     <h3>Total: $<span id="cart-total">0</span></h3>
+
+    <!-- Pincode Field -->
+    <label for="pincode">Enter Delivery Pincode:</label>
+    <input type="text" id="pincode" maxlength="6" placeholder="Enter 6-digit Indian pincode">
+    <div id="pincode-error" class="error">❌ Please enter a valid 6-digit Indian pincode.</div>
+
     <button onclick="goCheckout()">Proceed to Checkout</button>
   </main>
 
   <script src="cart.js"></script>
+  <script>
+    function goCheckout() {
+      const pincode = document.getElementById("pincode").value.trim();
+      const errorMsg = document.getElementById("pincode-error");
+
+      // ✅ Indian Pincode format: 6 digits, starting 1-9 (not 0)
+      const valid = /^[1-9][0-9]{5}$/.test(pincode);
+
+      if (!valid) {
+        errorMsg.style.display = "block";
+        return;
+      } else {
+        errorMsg.style.display = "none";
+        localStorage.setItem("pincode", pincode);
+        window.location.href = "payment.html"; // Redirect to payment page
+      }
+    }
+  </script>
 </body>
 </html>
