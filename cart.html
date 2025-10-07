@@ -35,7 +35,7 @@
 
     main {
       padding: 20px;
-      max-width: 800px;
+      max-width: 900px;
       margin: auto;
       background-color: #fff8f0;
       border-radius: 10px;
@@ -43,12 +43,52 @@
       margin-top: 20px;
     }
 
-    #cart-items {
-      margin-bottom: 20px;
+    h2 {
+      color: #ff6f61;
+      text-align: center;
     }
 
-    h3 {
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #ffe1db;
+      color: #333;
+    }
+
+    .remove-btn {
+      background-color: #ff6f61;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .remove-btn:hover {
+      background-color: #ff3b2e;
+    }
+
+    .total {
+      text-align: right;
+      margin-top: 20px;
+      font-size: 1.2em;
       color: #ff6f61;
+      font-weight: bold;
+    }
+
+    .btn-container {
+      text-align: center;
+      margin-top: 25px;
     }
 
     button {
@@ -59,10 +99,50 @@
       border-radius: 5px;
       cursor: pointer;
       font-size: 1em;
+      margin: 5px;
     }
 
     button:hover {
       background-color: #ff3b2e;
+    }
+
+    input[type="number"] {
+      width: 60px;
+      padding: 5px;
+      text-align: center;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 600px) {
+      table, thead, tbody, th, td, tr {
+        display: block;
+      }
+
+      thead tr {
+        display: none;
+      }
+
+      td {
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+      }
+
+      td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 10px;
+        width: 45%;
+        padding-left: 10px;
+        font-weight: bold;
+        text-align: left;
+      }
+
+      input[type="number"] {
+        width: 100%;
+      }
     }
   </style>
 </head>
@@ -75,9 +155,28 @@
   </header>
 
   <main>
-    <div id="cart-items"></div>
-    <h3>Total: $<span id="cart-total">0</span></h3>
-    <button onclick="goCheckout()">Proceed to Checkout</button>
+    <h2>Your Cart Items</h2>
+    <table id="cartTable">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Total</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="cartItems">
+        <!-- JS will insert items here -->
+      </tbody>
+    </table>
+
+    <p class="total">Grand Total: $<span id="cart-total">0.00</span></p>
+
+    <div class="btn-container">
+      <button onclick="clearCart()">Clear Cart</button>
+      <button onclick="goCheckout()">Proceed to Checkout</button>
+    </div>
   </main>
 
   <script src="cart.js"></script>
