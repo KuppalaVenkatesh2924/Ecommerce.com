@@ -1,184 +1,79 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Your Cart</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #fdf6e3;
-      color: #333;
-      margin: 0;
-      padding: 0;
-    }
+<!DOCTYPE html>  <html lang="en">  
+<head>  
+  <meta charset="UTF-8">  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+  <title>Your Cart</title>  
+  <style>  
+    body {  
+      font-family: Arial, sans-serif;  
+      background-color: #fdf6e3;  
+      color: #333;  
+      margin: 0;  
+      padding: 0;  
+    }  header {  
+  background-color: #ff6f61;  
+  color: white;  
+  padding: 20px;  
+  text-align: center;  
+}  
 
-    header {
-      background-color: #ff6f61;
-      color: white;
-      padding: 20px;
-      text-align: center;
-    }
+header h1 {  
+  margin: 0;  
+  font-size: 2em;  
+}  
 
-    header h1 {
-      margin: 0;
-      font-size: 2em;
-    }
+nav a {  
+  color: white;  
+  text-decoration: none;  
+  font-weight: bold;  
+  margin-top: 10px;  
+  display: inline-block;  
+}  
 
-    nav a {
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-      margin-top: 10px;
-      display: inline-block;
-    }
+main {  
+  padding: 20px;  
+  max-width: 800px;  
+  margin: auto;  
+  background-color: #fff8f0;  
+  border-radius: 10px;  
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);  
+  margin-top: 20px;  
+}  
 
-    main {
-      padding: 20px;
-      max-width: 900px;
-      margin: auto;
-      background-color: #fff8f0;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      margin-top: 20px;
-    }
+#cart-items {  
+  margin-bottom: 20px;  
+}  
 
-    h2 {
-      color: #ff6f61;
-      text-align: center;
-    }
+h3 {  
+  color: #ff6f61;  
+}  
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-    }
+button {  
+  background-color: #ff6f61;  
+  color: white;  
+  border: none;  
+  padding: 12px 25px;  
+  border-radius: 5px;  
+  cursor: pointer;  
+  font-size: 1em;  
+}  
 
-    th, td {
-      border: 1px solid #ddd;
-      padding: 10px;
-      text-align: center;
-    }
+button:hover {  
+  background-color: #ff3b2e;  
+}
 
-    th {
-      background-color: #ffe1db;
-      color: #333;
-    }
+  </style>  
+</head>  
+<body>  
+  <header>  
+    <h1>Your Cart</h1>  
+    <nav>  
+      <a href="index.html">🏬 Shop</a>  
+    </nav>  
+  </header>    <main>  
+    <div id="cart-items"></div>  
+    <h3>Total: $<span id="cart-total">0</span></h3>  
+    <button onclick="goCheckout()">Proceed to Checkout</button>  
+  </main>    <script src="cart.js"></script>  </body>  
+</html>  
 
-    input[type="number"] {
-      width: 60px;
-      padding: 5px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      text-align: center;
-    }
-
-    .remove-btn {
-      background-color: #ff6f61;
-      color: white;
-      border: none;
-      padding: 6px 12px;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    .remove-btn:hover {
-      background-color: #ff3b2e;
-    }
-
-    .total {
-      text-align: right;
-      margin-top: 20px;
-      font-size: 1.2em;
-      color: #ff6f61;
-      font-weight: bold;
-    }
-
-    .btn-container {
-      text-align: center;
-      margin-top: 25px;
-    }
-
-    button {
-      background-color: #ff6f61;
-      color: white;
-      border: none;
-      padding: 12px 25px;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 1em;
-      margin: 5px;
-    }
-
-    button:hover {
-      background-color: #ff3b2e;
-    }
-
-    @media (max-width: 600px) {
-      table, th, td {
-        font-size: 14px;
-      }
-
-      input[type="number"] {
-        width: 50px;
-      }
-    }
-  </style>
-</head>
-<body>
-
-  <header>
-    <h1>Your Cart</h1>
-    <nav>
-      <a href="index.html">🏬 Shop</a>
-    </nav>
-  </header>
-
-  <main>
-    <h2>Your Cart Items</h2>
-
-    <table>
-      <thead>
-        <tr>
-          <th>Product</th>
-          <th>Price</th>
-          <th>Quantity</th>
-          <th>Total</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Bluetooth Speaker</td>
-          <td>$39.99</td>
-          <td><input type="number" value="2" min="1"></td>
-          <td>$79.98</td>
-          <td><button class="remove-btn">Remove</button></td>
-        </tr>
-        <tr>
-          <td>Wireless Headphones</td>
-          <td>$89.99</td>
-          <td><input type="number" value="1" min="1"></td>
-          <td>$89.99</td>
-          <td><button class="remove-btn">Remove</button></td>
-        </tr>
-        <tr>
-          <td>Smart Watch</td>
-          <td>$59.99</td>
-          <td><input type="number" value="1" min="1"></td>
-          <td>$59.99</td>
-          <td><button class="remove-btn">Remove</button></td>
-        </tr>
-      </tbody>
-    </table>
-
-    <p class="total">Grand Total: $229.96</p>
-
-    <div class="btn-container">
-      <button>Clear Cart</button>
-      <button>Proceed to Checkout</button>
-    </div>
-  </main>
-
-</body>
-</html>
