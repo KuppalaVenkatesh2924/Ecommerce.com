@@ -1,7 +1,7 @@
-// Always reload from storage freshly
+// Always reload cart from localStorage
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-// Ensure quantity
+// Ensure each item has quantity
 cart = cart.map(item => ({ ...item, quantity: item.quantity || 1 }));
 
 function renderCart() {
@@ -11,7 +11,6 @@ function renderCart() {
   if (cart.length === 0) {
     container.innerHTML = `<tr><td colspan="5">Your cart is empty.</td></tr>`;
     document.getElementById("cart-total").textContent = "Total: ₹0";
-    localStorage.removeItem("cart"); // clear from storage
     return;
   }
 
@@ -40,7 +39,7 @@ function renderCart() {
   localStorage.setItem("cart", JSON.stringify(cart));
 }
 
-// Increase/decrease quantity
+// Update quantity
 function updateQuantity(index, delta) {
   cart[index].quantity += delta;
   if (cart[index].quantity < 1) {
@@ -49,7 +48,7 @@ function updateQuantity(index, delta) {
   renderCart();
 }
 
-// Remove one item
+// Remove item
 function removeItem(index) {
   cart.splice(index, 1);
   renderCart();
@@ -64,23 +63,19 @@ document.getElementById("clear-cart").addEventListener("click", () => {
   }
 });
 
-// Checkout
+// Checkout button
 document.getElementById("checkout").addEventListener("click", () => {
   if (cart.length === 0) {
     alert("Your cart is empty!");
     return;
   }
-  alert("Proceeding to checkout...");
-  cart = [];
-  localStorage.removeItem("cart");
-  renderCart();
+  // Redirect to checkout page without clearing cart
+  window.location.href = "checkout.html";
 });
 
-// ✅ Fix browser back-cache problem
-window.addEventListener("pageshow", (event) => {
-  // Always reload from localStorage when coming back
-  const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
-  cart = storedCart;
+// Fix browser back-cache problem
+window.addEventListener("pageshow", () => {
+  cart = JSON.parse(localStorage.getItem("cart")) || [];
   renderCart();
 });
 
