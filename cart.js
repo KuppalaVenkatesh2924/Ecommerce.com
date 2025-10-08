@@ -38,7 +38,7 @@ function renderCart() {
 
 function updateQuantity(index, qty) {
     const quantity = parseInt(qty);
-    if (quantity < 0) return;
+    if (quantity < 1) return;
     cart[index].quantity = quantity;
     renderCart();
 }
