@@ -1,70 +1,82 @@
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-// Ensure quantity exists
+// Ensure each item has quantity
 cart = cart.map(item => ({ ...item, quantity: item.quantity || 1 }));
 
+// Render cart items
 function renderCart() {
-  const tbody = document.getElementById("cart-items");
-  const emptyMsg = document.getElementById("empty-cart");
-  tbody.innerHTML = "";
+  const container = document.getElementById("cart-items");
+  container.innerHTML = "";
 
   if (cart.length === 0) {
-    document.getElementById("cart-total").textContent = "Grand Total: $0.00";
-    emptyMsg.style.display = "block";
+    container.innerHTML = `<tr><td colspan="5">Your cart is empty.</td></tr>`;
+    document.getElementById("cart-total").textContent = "Total: ₹0";
     return;
   }
 
-  emptyMsg.style.display = "none";
-  let total = 0;
+  let totalAmount = 0;
 
-  cart.forEach((item, i) => {
+  cart.forEach((item, index) => {
     const itemTotal = item.price * item.quantity;
-    total += itemTotal;
+    totalAmount += itemTotal;
 
-    const row = document.createElement("tr");
-    row.innerHTML = `
-      <td>${item.name}</td>
-      <td>$${item.price.toFixed(2)}</td>
-      <td>
-        <input type="number" value="${item.quantity}" min="1"
-          onchange="updateQuantity(${i}, this.value)">
-      </td>
-      <td>$${itemTotal.toFixed(2)}</td>
-      <td><button onclick="removeItem(${i})">Remove</button></td>
+    container.innerHTML += `
+      <tr>
+        <td>${item.name}</td>
+        <td>₹${item.price}</td>
+        <td>
+          <button class="quantity-btn" onclick="decreaseQuantity(${index})">-</button>
+          ${item.quantity}
+          <button class="quantity-btn" onclick="increaseQuantity(${index})">+</button>
+        </td>
+        <td>₹${itemTotal}</td>
+        <td><button onclick="removeItem(${index})">Remove</button></td>
+      </tr>
     `;
-    tbody.appendChild(row);
   });
 
-  document.getElementById("cart-total").textContent = `Grand Total: $${total.toFixed(2)}`;
+  document.getElementById("cart-total").textContent = `Total: ₹${totalAmount}`;
   localStorage.setItem("cart", JSON.stringify(cart));
 }
 
-function updateQuantity(index, qty) {
-  const quantity = parseInt(qty);
-  if (quantity < 1) return;
-  cart[index].quantity = quantity;
+// Increase quantity
+function increaseQuantity(index) {
+  cart[index].quantity++;
   renderCart();
 }
 
+// Decrease quantity
+function decreaseQuantity(index) {
+  if (cart[index].quantity > 1) {
+    cart[index].quantity--;
+  } else {
+    cart.splice(index, 1);
+  }
+  renderCart();
+}
+
+// Remove item
 function removeItem(index) {
   cart.splice(index, 1);
   renderCart();
 }
 
-function clearCart() {
-  if (confirm("Are you sure you want to clear the cart?")) {
-    cart = [];
-    renderCart();
-  }
-}
+// Clear cart
+document.getElementById("clear-cart").addEventListener("click", () => {
+  cart = [];
+  renderCart();
+});
 
-function goCheckout() {
+// Checkout
+document.getElementById("checkout").addEventListener("click", () => {
   if (cart.length === 0) {
     alert("Your cart is empty!");
     return;
   }
-  window.location.href = "checkout.html";
-}
+  alert("Proceeding to checkout...");
+  cart = [];
+  renderCart();
+});
 
 // Initial render
 renderCart();
