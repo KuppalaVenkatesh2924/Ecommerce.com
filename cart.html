@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Your Cart</title>
   <style>
     body {
@@ -35,34 +35,82 @@
 
     main {
       padding: 20px;
-      max-width: 800px;
+      max-width: 900px;
       margin: auto;
       background-color: #fff8f0;
       border-radius: 10px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      margin-top: 30px;
+    }
+
+    h2 {
+      color: #ff6f61;
+      text-align: center;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
       margin-top: 20px;
     }
 
-    #cart-items {
-      margin-bottom: 20px;
+    th, td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: center;
     }
 
-    h3 {
-      color: #ff6f61;
+    th {
+      background-color: #ffe0db;
+      color: #333;
+    }
+
+    tr:nth-child(even) {
+      background-color: #fff5f2;
     }
 
     button {
       background-color: #ff6f61;
       color: white;
       border: none;
-      padding: 12px 25px;
+      padding: 8px 15px;
       border-radius: 5px;
       cursor: pointer;
-      font-size: 1em;
+      font-size: 0.9em;
     }
 
     button:hover {
       background-color: #ff3b2e;
+    }
+
+    #cart-total {
+      color: green;
+      font-weight: bold;
+      font-size: 1.2em;
+    }
+
+    .cart-actions {
+      margin-top: 20px;
+      text-align: right;
+    }
+
+    .cart-actions button {
+      margin-left: 10px;
+    }
+
+    .empty-cart {
+      text-align: center;
+      color: #777;
+      margin-top: 30px;
+      font-size: 1.1em;
+    }
+
+    input[type="number"] {
+      width: 60px;
+      padding: 5px;
+      text-align: center;
+      border: 1px solid #ccc;
+      border-radius: 4px;
     }
   </style>
 </head>
@@ -70,14 +118,34 @@
   <header>
     <h1>Your Cart</h1>
     <nav>
-      <a href="index.html">🏬 Shop</a>
+      <a href="index.html">🏬 Back to Shop</a>
     </nav>
   </header>
 
   <main>
-    <div id="cart-items"></div>
-    <h3>Total: $<span id="cart-total">0</span></h3>
-    <button onclick="goCheckout()">Proceed to Checkout</button>
+    <h2>Your Cart</h2>
+    <table id="cart-table">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Total</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="cart-items"></tbody>
+    </table>
+
+    <div class="empty-cart" id="empty-cart" style="display: none;">
+      Your cart is empty!
+    </div>
+
+    <div class="cart-actions">
+      <span id="cart-total">Grand Total: $0.00</span>
+      <button onclick="clearCart()">Clear Cart</button>
+      <button onclick="goCheckout()">Checkout</button>
+    </div>
   </main>
 
   <script src="cart.js"></script>
