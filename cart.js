@@ -1,9 +1,8 @@
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-// Ensure each item has quantity
+// Ensure valid quantity
 cart = cart.map(item => ({ ...item, quantity: item.quantity || 1 }));
 
-// Render cart items
 function renderCart() {
   const container = document.getElementById("cart-items");
   container.innerHTML = "";
@@ -11,6 +10,7 @@ function renderCart() {
   if (cart.length === 0) {
     container.innerHTML = `<tr><td colspan="5">Your cart is empty.</td></tr>`;
     document.getElementById("cart-total").textContent = "Total: ₹0";
+    localStorage.removeItem("cart"); // ✅ clear from storage
     return;
   }
 
@@ -25,9 +25,9 @@ function renderCart() {
         <td>${item.name}</td>
         <td>₹${item.price}</td>
         <td>
-          <button class="quantity-btn" onclick="decreaseQuantity(${index})">-</button>
+          <button class="quantity-btn" onclick="changeQty(${index}, -1)">−</button>
           ${item.quantity}
-          <button class="quantity-btn" onclick="increaseQuantity(${index})">+</button>
+          <button class="quantity-btn" onclick="changeQty(${index}, 1)">+</button>
         </td>
         <td>₹${itemTotal}</td>
         <td><button onclick="removeItem(${index})">Remove</button></td>
@@ -39,32 +39,26 @@ function renderCart() {
   localStorage.setItem("cart", JSON.stringify(cart));
 }
 
-// Increase quantity
-function increaseQuantity(index) {
-  cart[index].quantity++;
+// Change quantity
+function changeQty(index, delta) {
+  cart[index].quantity += delta;
+  if (cart[index].quantity < 1) cart.splice(index, 1);
   renderCart();
 }
 
-// Decrease quantity
-function decreaseQuantity(index) {
-  if (cart[index].quantity > 1) {
-    cart[index].quantity--;
-  } else {
-    cart.splice(index, 1);
-  }
-  renderCart();
-}
-
-// Remove item
+// Remove single item
 function removeItem(index) {
   cart.splice(index, 1);
   renderCart();
 }
 
-// Clear cart
+// Clear all items
 document.getElementById("clear-cart").addEventListener("click", () => {
-  cart = [];
-  renderCart();
+  if (confirm("Are you sure you want to clear the cart?")) {
+    cart = [];
+    localStorage.removeItem("cart");
+    renderCart();
+  }
 });
 
 // Checkout
@@ -75,7 +69,19 @@ document.getElementById("checkout").addEventListener("click", () => {
   }
   alert("Proceeding to checkout...");
   cart = [];
+  localStorage.removeItem("cart");
   renderCart();
+});
+
+// ✅ Prevent “back” from restoring old cart data
+window.addEventListener("pageshow", (event) => {
+  if (event.persisted) {
+    const stored = JSON.parse(localStorage.getItem("cart"));
+    if (!stored || stored.length === 0) {
+      cart = [];
+      renderCart();
+    }
+  }
 });
 
 // Initial render
