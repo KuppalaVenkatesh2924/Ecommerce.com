@@ -1,4 +1,4 @@
-// Products
+// Products names
 let products =  [
   {
     id: 1,
