@@ -26,7 +26,7 @@ let products =  [
     name: "Camera",
     price: 400,
     desc: "HD DSLR Camera",
-    img: "https://images.unsplash.com/photo-1504215680853-026ed2a45def?w=600&auto=format&fit=crop&q=80"
+    img: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=1200"
   }
 ];
 
